@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { truncate, capitalize, slugify } from "../src/strings.js";
+import { truncate, capitalize, slugify, pad } from "../src/strings.js";
 
 describe("truncate", () => {
   it("returns the string unchanged when within limit", () => {
@@ -40,5 +40,39 @@ describe("slugify", () => {
 
   it("removes non-alphanumeric characters", () => {
     expect(slugify("a!b@c")).toBe("a-b-c");
+  });
+});
+
+describe("pad", () => {
+  it("pads a shorter string to the target length using the default space", () => {
+    expect(pad("hi", 5)).toBe("hi   ");
+  });
+
+  it("returns the string unchanged when it already matches the target length", () => {
+    expect(pad("hello", 5)).toBe("hello");
+  });
+
+  it("returns the string unchanged when it exceeds the target length", () => {
+    expect(pad("hello world", 5)).toBe("hello world");
+  });
+
+  it("pads an empty string to the target length", () => {
+    expect(pad("", 3)).toBe("   ");
+  });
+
+  it("repeats a custom pad string", () => {
+    expect(pad("ab", 6, "._")).toBe("ab._._");
+  });
+
+  it("truncates a partial repetition of a custom pad string", () => {
+    expect(pad("a", 6, "._")).toBe("a._._.");
+  });
+
+  it("uses a single space when no pad string is given", () => {
+    expect(pad("x", 4)).toBe("x   ");
+  });
+
+  it("returns the value unchanged when given an empty pad string", () => {
+    expect(pad("hi", 5, "")).toBe("hi");
   });
 });

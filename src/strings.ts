@@ -24,3 +24,15 @@ export function slugify(value: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+
+/**
+ * Pad a string to `targetLength` by repeating `pad` (default: a single space)
+ * on the right side. Returns the value unchanged when it is already at least
+ * `targetLength` long. When `pad` is empty, no padding is possible, so the
+ * value is returned unchanged.
+ */
+export function pad(value: string, targetLength: number, pad = " "): string {
+  if (value.length >= targetLength || pad.length === 0) return value;
+  const needed = targetLength - value.length;
+  return value + pad.repeat(Math.ceil(needed / pad.length)).slice(0, needed);
+}
