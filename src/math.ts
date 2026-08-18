@@ -18,3 +18,10 @@ export function average(values: number[]): number {
   if (values.length === 0) throw new Error("cannot average an empty list");
   return sum(values) / values.length;
 }
+
+/**
+ * Divide two numbers. Note: does NOT validate the divisor.
+ */
+export function divide(a: number, b: number): number {
+  return a / b;
+}
