@@ -24,3 +24,8 @@ export function slugify(value: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+
+/** Return true when a string reads the same forwards and backwards. */
+export function isPalindrome(s: string): boolean {
+  return s === s.split("").reverse().join("");
+}
