@@ -18,3 +18,8 @@ export function average(values: number[]): number {
   if (values.length === 0) throw new Error("cannot average an empty list");
   return sum(values) / values.length;
 }
+
+/** Return the cube of a number. */
+export function cube(n: number): number {
+  return n * n * n;
+}
